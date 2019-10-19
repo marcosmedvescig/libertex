@@ -1,24 +1,25 @@
 import pandas as pd
 import numpy as np
+import sys
 
 def knn_predict(x_train, y_train, x_test, k=3,result_type = 'class'):
 
   # Parameter validation
   if len(x_train) < k:
       print('ERROR: need to have at least {0} train samples'.format(k))
-      quit
+      sys.exit
   if len(x_train) != len(y_train):
       print('ERROR: x_train and y_train must be same size')
-      quit
+      sys.exit
   if k < 2:
       print('ERROR: k must be 2 or larger')
-      quit
+      sys.exit
   if len(x_test) < 1:
       print('ERROR: need at least 1 sample to predict'.format(k))
-      quit
+      sys.exit
   if result_type not in ['class','proba']:
       print('ERROR: result_type must be class or proba')
-      quit
+      sys.exit
 
   # Run Predictions
   y_pred_list = []
@@ -33,7 +34,7 @@ def knn_predict(x_train, y_train, x_test, k=3,result_type = 'class'):
     # Predict Class
     if result_type == 'class':
       y_pred = data[0:k]['class'].value_counts().idxmax()
-      print('Class x: {0} y:{1} pred:{2}'.format(test_touple[0],test_touple[1],y_pred))
+      # print('Class x: {0} y:{1} pred:{2}'.format(test_touple[0],test_touple[1],y_pred))
 
     # Predict Class Probability
     if result_type == 'proba':
@@ -44,7 +45,7 @@ def knn_predict(x_train, y_train, x_test, k=3,result_type = 'class'):
          y_pred = [y_pred_tmp[0],1]
       else:
         y_pred = [y_pred_tmp[0], y_pred_tmp[1]]
-      print('Proba x: {0} y:{1} proba:{2}'.format(test_touple[0],test_touple[1],y_pred))
+      # print('Proba x: {0} y:{1} proba:{2}'.format(test_touple[0],test_touple[1],y_pred))
 
     y_pred_list.append(y_pred)
 
