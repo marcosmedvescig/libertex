@@ -23,5 +23,3 @@ predictions['class_predict'] = knn_predict(x_train,y_train,x_test,k=13)
 # plot results
 sns.scatterplot(data = data, x= 'x', y='y',hue='class_train',palette='Set2',alpha=0.5)
 sns.scatterplot(data = predictions, x= 'x', y='y',hue='class_predict',palette='Set2');
-
-knn_predict([(1,2),(2,3)],[1,1],[1,0],k=13)
